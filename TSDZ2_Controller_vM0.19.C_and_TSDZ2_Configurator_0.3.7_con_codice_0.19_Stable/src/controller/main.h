@@ -401,11 +401,9 @@ VLCD6 Faults List:
 // x = (1/(150RPM/60)) / (0.000064)
 // PAS_ABSOLUTE_MAX_CADENCE_PWM_CYCLE_TICKS = (x / PAS_NUMBER_MAGNETS)
 #define PAS_ABSOLUTE_MAX_CADENCE_PWM_CYCLE_TICKS  					(uint16_t) (6250 / PAS_NUMBER_MAGNETS)	// max hard limit to 150 RPM PAS cadence
-#define MIN_PAS_CADENCE_RPM																	10
-#if(MIN_PAS_CADENCE_RPM == 10)
-#define PAS_ABSOLUTE_MIN_CADENCE_PWM_CYCLE_TICKS  					(uint16_t) (93750 / PAS_NUMBER_MAGNETS)	// min hard limit to 10 RPM PAS cadence
-#elif(MIN_PAS_CADENCE_RPM == 5)
-#define PAS_ABSOLUTE_MIN_CADENCE_PWM_CYCLE_TICKS  					(uint16_t) (187500 / PAS_NUMBER_MAGNETS)	// min hard limit to 5 RPM PAS cadence
+#define MIN_PAS_CADENCE_RPM																	15
+#ifdef MIN_PAS_CADENCE_RPM
+#define PAS_ABSOLUTE_MIN_CADENCE_PWM_CYCLE_TICKS  					(uint16_t) (937500 / MIN_PAS_CADENCE_RPM / PAS_NUMBER_MAGNETS)	// min hard limit to 20 RPM PAS cadence
 #else
 #define PAS_ABSOLUTE_MIN_CADENCE_PWM_CYCLE_TICKS  					(uint16_t) (375000 / PAS_NUMBER_MAGNETS)	// min hard limit to 2.5 RPM PAS cadence
 #endif
