@@ -1718,8 +1718,11 @@ static void calc_pedal_force_and_torque(void)
 	
   // calculate torque on pedals
   ui16_pedal_torque_x100 = (uint16_t) ui8_torque_sensor * (uint16_t) ADC_STEP_PEDAL_TORQUE_X100;
+  if(ui8_pas_cadence_rpm > 0){
   ui16_pedal_torque_x10 = ui16_pedal_torque_x100 / 10;
-	
+  }else{
+    ui16_pedal_torque_x10 = 0;
+  }
 	// --- OLD CALCULATION FOR ADC STEP PEDAL TORQUE ------------------------------------------------
 	// Torque (force) value found experimentaly.
 	// Measured with a cheap digital hook scale, we found that
